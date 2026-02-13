@@ -53,7 +53,7 @@ class UsageStats:
 
         total_seconds = int(self.remaining_time.total_seconds())
         if total_seconds <= 0:
-            return "Resetting"
+            return "Rolling"  # 滚动窗口持续更新
 
         hours = total_seconds // 3600
         minutes = (total_seconds % 3600) // 60
@@ -105,14 +105,14 @@ class UsageCalculator:
             if remaining_time.total_seconds() < 0:
                 remaining_time = timedelta(0)
 
-        # 计算百分比
+        # 计算百分比（允许超过 100%）
         percentage = (total_tokens / self.config.token_limit * 100) if self.config.token_limit > 0 else 0
         remaining_tokens = max(0, self.config.token_limit - total_tokens)
 
         return UsageStats(
             total_tokens=total_tokens,
             token_limit=self.config.token_limit,
-            percentage=min(percentage, 100.0),
+            percentage=percentage,  # 允许显示超过 100%
             window_start=window_start,
             window_end=now,
             remaining_tokens=remaining_tokens,

@@ -15,11 +15,11 @@ PLANS = {
         "description": "Pro ($20/month)"
     },
     "Max 5x": {
-        "token_limit": 43_723_140,  # 8,744,628 * 5
+        "token_limit": 100_000_000,  # ~100M tokens based on actual limit testing
         "description": "Max 5x ($100/month)"
     },
     "Max 20x": {
-        "token_limit": 174_892_560,  # 8,744,628 * 20
+        "token_limit": 400_000_000,  # ~400M tokens (estimated 4x of Max 5x)
         "description": "Max 20x ($200/month)"
     }
 }
